@@ -3,6 +3,6 @@
 $postalCode = $_GET['code'];
 
 // stub
-die(json_encode(
+echo(json_encode(
     array('city' => 'Gdańsk')
 ));
