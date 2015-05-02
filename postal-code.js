@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     'use strict';
 
     $.fn.postalCode = function (options) {
@@ -27,10 +27,10 @@
                         success: function (data) {
                             $(cityElem).val(data.city);
                         },
-                        error: function (xhr) {
+                        error: function () { // xhr
                             // TODO: error handling
                         }
-                    })
+                    });
                 }, options.delay);
             }
         });
