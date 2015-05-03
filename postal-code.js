@@ -64,7 +64,7 @@
     $.fn.postalCode.defaults = {
         format: /\d{2}-\d{3}/i, // xx-xxx
         outputSelector: undefined,
-        validate: false,
+        validate: true,
         delay: 200,
         url: undefined
     };
