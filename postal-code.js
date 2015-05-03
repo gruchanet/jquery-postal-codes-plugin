@@ -26,17 +26,20 @@
                         data: { code: postalCode },
                         dataType: 'json',
                         success: function (data) {
-                            // fill elem with city
-                            cityElem.val(data.city);
+                            if (data.city) {
+                                // fill elem with city
+                                cityElem.val(data.city);
 
-                            if (options.validate) {
-                                // reset styles
-                                postalInput.css('border-color', '');
-                                // for label
-                                $('[for="' + postalInput.attr('id') + '"]').css('color', '');
+                                if (options.validate) {
+                                    resetInputStyles(postalInput);
+                                    unblockFormSubmission(postalInput.parents('form'));
+                                }
+                            } else {
+                                // reset elem with city
+                                cityElem.val('');
 
-                                // detach block form submission
-                                postalInput.parents('form').off('submit');
+                                inputErrorStyles(postalInput);
+                                blockFormSubmission(postalInput.parents('form'));
                             }
                         },
                         error: function () { // xhr
@@ -46,16 +49,8 @@
                 }, options.delay);
             } else {
                 if (options.validate) {
-                    // set error styles:
-                    // for input
-                    postalInput.css('border-color', '#a94442');
-                    // for label
-                    $('[for="' + postalInput.attr('id') + '"]').css('color', '#a94442');
-
-                    // block form submission
-                    postalInput.parents('form').on('submit', function (event) {
-                        return false;
-                    });
+                    inputErrorStyles(postalInput);
+                    blockFormSubmission(postalInput.parents('form'));
                 }
             }
         });
@@ -68,5 +63,31 @@
         delay: 200,
         url: undefined
     };
+
+    function inputErrorStyles(input) {
+        // set error styles:
+        // for input
+        $(input).css('border-color', '#a94442');
+        // for label
+        $('[for="' + $(input).attr('id') + '"]').css('color', '#a94442');
+    }
+
+    function resetInputStyles(input) {
+        // reset styles:
+        // for input
+        $(input).css('border-color', '');
+        // for label
+        $('[for="' + $(input).attr('id') + '"]').css('color', '');
+    }
+
+    function blockFormSubmission(form) {
+        form.on('submit', function (event) {
+            return false;
+        });
+    }
+
+    function unblockFormSubmission(form) {
+        form.off('submit');
+    }
 
 })(jQuery);
