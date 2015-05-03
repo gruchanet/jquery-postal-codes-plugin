@@ -34,6 +34,9 @@
                                 postalInput.css('border-color', '');
                                 // for label
                                 $('[for="' + postalInput.attr('id') + '"]').css('color', '');
+
+                                // detach block form submission
+                                postalInput.parents('form').off('submit');
                             }
                         },
                         error: function () { // xhr
@@ -48,6 +51,11 @@
                     postalInput.css('border-color', '#a94442');
                     // for label
                     $('[for="' + postalInput.attr('id') + '"]').css('color', '#a94442');
+
+                    // block form submission
+                    postalInput.parents('form').on('submit', function (event) {
+                        return false;
+                    });
                 }
             }
         });
