@@ -1,6 +1,8 @@
 (function ($) {
     'use strict';
 
+    // TODO: fix sending multiple requests/ eg. kill previous req or prevent sending another request
+
     $.fn.postalCode = function (options) {
         // skip if incorrect options object passed
         if (!options.url || !options.outputSelector) {
