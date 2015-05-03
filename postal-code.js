@@ -59,7 +59,7 @@
     };
 
     $.fn.postalCode.defaults = {
-        format: /\d{2}-\d{3}/i, // xx-xxx
+        format: /^\d{2}-\d{3}$/i, // xx-xxx
         outputSelector: undefined,
         validate: true,
         delay: 200,
